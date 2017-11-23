@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "486831195984",
+    "project_id": "playvideo-186713"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486831195984:android:7f2ddaebd0e77df7",
+        "android_client_info": {
+          "package_name": "nhan1303.watsong"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486831195984-hht0rqjmrf2tbcm6i0da6qbrd750m5nh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "nhan1303.watsong",
+            "certificate_hash": "40900f6dc61bcad6d0edaad1ab6d45b6822a7f34"
+          }
+        },
+        {
+          "client_id": "486831195984-mgjqkn6dea3cght38e5t240uncqosko9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCmc2zyQS8jAboIw3DNEc7FJgu4ka0aZM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

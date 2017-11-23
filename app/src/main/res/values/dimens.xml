@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="height_header_feed">42dp</dimen>
+    <dimen name="margin_left_direct">12dp</dimen>
+    <dimen name="margin_left_Search">10dp</dimen>
+    <dimen name="margin_ImageView_left_Search">3dp</dimen>
+    <dimen name="width_Search">270dp</dimen>
+    <dimen name="padding_left_EditText">30dp</dimen>
+    <dimen name="height_EditText">40dp</dimen>
+    <dimen name="width_EditText">300dp</dimen>
+    <dimen name="margin_left_Messenger">12dp</dimen>
+    <dimen name="height_actionBar">36dp</dimen>
+    <dimen name="padding_actionBar">2dp</dimen>
+    <dimen name="margin_top_tabBar">5dp</dimen>
+    <dimen name="margin_top_line_newsFeed">10dp</dimen>
+    <dimen name="size_circle">13dp</dimen>
+    <dimen name="padding_icon_news_feed">8dp</dimen>
+
+    <!--activiti_main-->
+
+    <dimen name="height_taskbar">50dp</dimen>
+    <dimen name="size_icon_task_bar">32dp</dimen>
+    <dimen name="margin_icon_task_bar">16dp</dimen>
+    <dimen name="size_button_circle">5dp</dimen>
+    <dimen name="margin_left_button_circle">10dp</dimen>
+
+    <!--ino singfer-->
+    <dimen name="margin_top_ImageView_info_singer">16dp</dimen>
+    <dimen name="width_info_singer_iv">130dp</dimen>
+    <dimen name="height_info_singer_iv">60dp</dimen>
+    <dimen name="marginTop_tv_song_info_singer">3dp</dimen>
+    <dimen name="margin_left_tv_song_info_singer">16dp</dimen>
+    <dimen name="textSize_tv_song_info_singer">18dp</dimen>
+    <dimen name="textSize_tv_singer_info_singer">12dp</dimen>
+    <!--information song-->
+    <dimen name="height_appbar_information_song">160dp</dimen>
+    <dimen name="expandedTitleMarginStart_information_song">48dp</dimen>
+    <dimen name="expandedTitleMarginEnd_information_song">64dp</dimen>
+    <dimen name="size_imageView_information_song">20dp</dimen>
+    <!--content scrolling-->
+    <dimen name="margin_left_textView_lyrics_content_scrolling">16dp</dimen>
+    <dimen name="text_size_lyrics_content_scrolling_tv">16sp</dimen>
+    <dimen name="height_scrollView">100dp</dimen>
+    <dimen name="margin_top_content">6dp</dimen>
+    <dimen name="margin_left_content_scrolling_tv">16dp</dimen>
+    <dimen name="margin_top_textView_content_scrolling">16dp</dimen>
+    <dimen name="textSize_content_scrolling_tv">16sp</dimen>
+    <dimen name="width_YouTubePlayerView_content_scrolling">300dp</dimen>
+    <dimen name="height_YouTubePlayerView_content_scrolling">200dp</dimen>
+    <dimen name="margin_top_YouTubePlayerView_content_scrolling">16dp</dimen>
+</resources>

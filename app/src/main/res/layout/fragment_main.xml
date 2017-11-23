@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="nhan1303.watsong.activity.MainActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:id="@+id/tvPowerBy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@id/tvACR"
+                    android:alpha="0.7"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="Powered by "
+                    android:textColor="#9E9E9E"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/tvACR"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/tvPowerBy"
+                    android:alpha="0.7"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="ACR"
+                    android:textColor="#9E9E9E"
+                    android:textStyle="bold|italic" />
+
+                <TextView
+                    android:id="@+id/tvCloud"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/tvACR"
+                    android:alpha="0.7"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="Cloud"
+                    android:textColor="#9E9E9E"
+                    android:textStyle="italic" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical">
+
+            <com.romainpiel.shimmer.ShimmerTextView
+                android:id="@+id/tvTap"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="cursive"
+                android:gravity="center_horizontal"
+                android:text="Tap to identify music"
+                android:textColor="#444"
+                android:textSize="30sp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvTapCancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="350dp"
+            android:fontFamily="cursive"
+            android:gravity="center"
+            android:textColor="#fff"
+            android:textSize="25sp" />
+
+        <com.skyfishjy.library.RippleBackground xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="420dp"
+            app:rb_color="#FF5252"
+            app:rb_duration="3000"
+            app:rb_radius="36dp"
+            app:rb_rippleAmount="4"
+            app:rb_scale="6"
+            app:rb_strokeWidth="10dp"
+            app:rb_type="fillRipple">
+
+            <Button
+                android:id="@+id/btnRecord"
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/ic_magnet" />
+
+        </com.skyfishjy.library.RippleBackground>
+
+    </FrameLayout>
+
+</LinearLayout>

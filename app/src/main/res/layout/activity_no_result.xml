@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFB300"
+    android:orientation="vertical"
+    tools:context="nhan1303.watsong.activity.NoResultActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/ivCancel"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_margin="16dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_cancel2" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="90dp">
+
+        <ImageView
+            android:layout_width="90dp"
+            android:layout_height="60dp"
+            android:src="@drawable/ic_warning_metro" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="No Result."
+            android:textStyle="bold"
+            android:textColor="#fff"
+            android:textSize="30sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="We didn't quite catch that"
+            android:textColor="#fff"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/btnTryAgain"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:text="Try Again"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:textColor="#fff"
+            android:gravity="center"
+            android:background="@drawable/custom_button"/>
+
+    </LinearLayout>
+
+</LinearLayout>

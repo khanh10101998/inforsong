@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_scrolling"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background1"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/activity_information_song">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_top_content"
+        android:gravity="center_horizontal"
+        android:nestedScrollingEnabled="true"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:background="#812d2d2d"
+            android:padding="10dp">
+
+            <com.facebook.share.widget.ShareButton
+                android:id="@+id/fb_share_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3.5dp"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/share_facebook_iv"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_facebook" />
+
+            <View
+                android:layout_width="0.2dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="#d1ffffff" />
+
+            <ImageView
+                android:id="@+id/share_google_iv"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_sharing_google" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top_content"
+            android:background="#0000ff00"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/margin_left_content_scrolling_tv">
+
+            <TextView
+                android:id="@+id/tv_video"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="Videos"
+                android:textColor="#f0f0f0"
+                android:textSize="@dimen/textSize_content_scrolling_tv"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <com.google.android.youtube.player.YouTubePlayerView
+            android:id="@+id/youtube"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_YouTubePlayerView_content_scrolling"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/margin_top_content"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_top_content"
+        android:background="#0000ff00"
+        android:text="Lyrics:"
+        android:textColor="#f0f0f0"
+        android:textSize="@dimen/text_size_lyrics_content_scrolling_tv"
+        android:textStyle="bold"
+        android:paddingLeft="@dimen/margin_left_textView_lyrics_content_scrolling"/>
+
+    <LinearLayout
+        android:id="@+id/line_lyrics"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical">
+
+            <TextView
+                android:id="@+id/tv_lyrics"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#00f0f0f0"
+                android:scrollHorizontally="false"
+                android:text="none"
+                android:textAlignment="center"
+                android:textColor="#f0f0f0" />
+        </android.support.v4.widget.NestedScrollView>
+    </LinearLayout>
+</LinearLayout>
