@@ -52,8 +52,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initControl();
         initDisplay();
         initEvent();
-
-
     }
 
     private void initData() {

@@ -158,6 +158,8 @@ public class FragmentMain extends Fragment implements IACRCloudListener {
                         tvTapCancel.setText("");
                         tvTap.setText("Tap to identify music");
                         isTapped = false;
+
+
                     }
                 } else {
                     showDialogInternet();
@@ -359,13 +361,11 @@ public class FragmentMain extends Fragment implements IACRCloudListener {
                         if (external_metadata.has("youtube")) {
                             JSONObject spotify = external_metadata.getJSONObject("youtube");
                             vid = spotify.getString("vid");
-                        }
-
-                        if(vid == null){
+                        }else {
                             getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                   readJson =new ReadJson(title_track,artist_name);
+                                    readJson =new ReadJson(title_track,artist_name);
                                     try {
                                         readJson.execute().get();
                                     } catch (InterruptedException e) {
@@ -378,6 +378,7 @@ public class FragmentMain extends Fragment implements IACRCloudListener {
                             });
                             vid = readJson.getVideoId();
                         }
+
 
                         if (external_metadata.has("spotify")) {
                             JSONObject spotify = external_metadata.getJSONObject("spotify");
