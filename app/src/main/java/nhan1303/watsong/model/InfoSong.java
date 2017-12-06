@@ -1,5 +1,7 @@
 package nhan1303.watsong.model;
 
+import com.facebook.AccessToken;
+
 import java.io.Serializable;
 
 /**
@@ -7,71 +9,55 @@ import java.io.Serializable;
  */
 
 public class InfoSong implements Serializable{
-    String title_track;
-    String artist_name;
+    String titleTrack;
+    String artistName;
     String urlImage = "";
-    int ic_place_holder = 0;
+    int icPlaceHolder = 0;
     String currentTime;
-    String id_youtube="";
+    String idYoutube ="";
+    AccessToken accessToken;
 
+    public AccessToken getAccessToken() {
+        return accessToken;
+    }
 
+    public void setAccessToken(AccessToken accessToken) {
+        this.accessToken = accessToken;
+    }
 
     public InfoSong() {
     }
 
-    public InfoSong(String title_track, String artist_name, String urlImage, String currentTime) {
-        this.title_track = title_track;
-        this.artist_name = artist_name;
-        this.urlImage = urlImage;
-        this.currentTime = currentTime;
-    }
-
-    public InfoSong(String title_track, String artist_name, int ic_place_holder, String currentTime) {
-        this.title_track = title_track;
-        this.artist_name = artist_name;
-        this.currentTime = currentTime;
-        this.ic_place_holder = ic_place_holder;
-    }
-
-    public InfoSong(String title_track, String artist_name, String urlImage, String currentTime, String vid) {
-        this.title_track = title_track;
-        this.artist_name = artist_name;
+    public InfoSong(String titleTrack, String artistName, String urlImage, String currentTime, String vid) {
+        this.titleTrack = titleTrack;
+        this.artistName = artistName;
         this.urlImage    = urlImage;
-        this.id_youtube  = vid;
+        this.idYoutube = vid;
         this.currentTime = currentTime;
     }
 
-    public InfoSong(String title_track, String artist_name, int ic_place_holder, String currentTime, String vid) {
-        this.title_track = title_track;
-        this.artist_name = artist_name;
-        this.id_youtube  = vid;
+    public InfoSong(String titleTrack, String artistName, int icPlaceHolder, String currentTime, String vid) {
+        this.titleTrack = titleTrack;
+        this.artistName = artistName;
+        this.idYoutube = vid;
         this.currentTime = currentTime;
-        this.ic_place_holder = ic_place_holder;
+        this.icPlaceHolder = icPlaceHolder;
     }
 
-
-    public int getIc_place_holder() {
-        return ic_place_holder;
+    public String getTitleTrack() {
+        return titleTrack;
     }
 
-    public void setIc_place_holder(int ic_place_holder) {
-        this.ic_place_holder = ic_place_holder;
+    public void setTitleTrack(String titleTrack) {
+        this.titleTrack = titleTrack;
     }
 
-    public String getTitle_track() {
-        return title_track;
+    public String getArtistName() {
+        return artistName;
     }
 
-    public void setTitle_track(String title_track) {
-        this.title_track = title_track;
-    }
-
-    public String getArtist_name() {
-        return artist_name;
-    }
-
-    public void setArtist_name(String artist_name) {
-        this.artist_name = artist_name;
+    public void setArtistName(String artistName) {
+        this.artistName = artistName;
     }
 
     public String getUrlImage() {
@@ -82,6 +68,14 @@ public class InfoSong implements Serializable{
         this.urlImage = urlImage;
     }
 
+    public int getIcPlaceHolder() {
+        return icPlaceHolder;
+    }
+
+    public void setIcPlaceHolder(int icPlaceHolder) {
+        this.icPlaceHolder = icPlaceHolder;
+    }
+
     public String getCurrentTime() {
         return currentTime;
     }
@@ -90,21 +84,23 @@ public class InfoSong implements Serializable{
         this.currentTime = currentTime;
     }
 
-    public String getId_youtube() {
-        return id_youtube;
+    public String getIdYoutube() {
+        return idYoutube;
     }
 
-    public void setId_youtube(String id_youtube) {
-        id_youtube = id_youtube;
+    public void setIdYoutube(String idYoutube) {
+        this.idYoutube = idYoutube;
     }
+
     @Override
     public String toString() {
         return "InfoSong{" +
-                "title_track='" + title_track + '\'' +
-                ", artist_name='" + artist_name + '\'' +
+                "titleTrack='" + titleTrack + '\'' +
+                ", artistName='" + artistName + '\'' +
                 ", urlImage='" + urlImage + '\'' +
+                ", icPlaceHolder=" + icPlaceHolder +
                 ", currentTime='" + currentTime + '\'' +
-                ", ic_place_holder=" + ic_place_holder +
+                ", idYoutube='" + idYoutube + '\'' +
                 '}';
     }
 }

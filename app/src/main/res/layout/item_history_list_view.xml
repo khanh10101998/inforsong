@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    tools:ignore="MissingPrefix">
 
     <LinearLayout
         android:layout_width="80dp"
@@ -28,6 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="Em Khong La Duy Nhat"
+            fontPath="fonts/TenorSans-Regular.ttf"
             android:textColor="#fff"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -36,6 +39,7 @@
             android:id="@+id/tv_artist_item_history"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            fontPath="fonts/TenorSans-Regular.ttf"
             android:textColor="#fff"
             android:text="Toc Tien"
             android:textSize="16sp" />
@@ -45,6 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            fontPath="fonts/TenorSans-Regular.ttf"
             android:textColor="#fff"
             android:text="16:36, 13 thg 11, 2017" />
 

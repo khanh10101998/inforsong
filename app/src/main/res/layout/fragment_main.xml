@@ -7,21 +7,79 @@
     android:background="@android:color/transparent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context="nhan1303.watsong.activity.MainActivity">
+    tools:context="nhan1303.watsong.activity.MainActivity"
+    tools:ignore="MissingPrefix">
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <com.skyfishjy.library.RippleBackground xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.95"
+            app:rb_color="#FF5252"
+            app:rb_duration="3000"
+            app:rb_radius="36dp"
+            app:rb_rippleAmount="4"
+            app:rb_scale="6"
+            app:rb_strokeWidth="10dp"
+            app:rb_type="fillRipple">
+
+            <Button
+                android:id="@+id/btnRecord"
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/ic_magnet" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btnRecord"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical">
+
+                <com.romainpiel.shimmer.ShimmerTextView
+                    android:id="@+id/tvTap"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="cursive"
+                    android:gravity="center_horizontal"
+                    android:text="Tap to identify music"
+                    android:textColor="#444"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/tvTapCancel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="cursive"
+                    android:gravity="center"
+                    android:textColor="#fff"
+                    android:textSize="25sp" />
+
+            </LinearLayout>
+
+        </com.skyfishjy.library.RippleBackground>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="48dp"
+            android:layout_marginBottom="16dp">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="16dp">
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/tvPowerBy"
@@ -56,59 +114,9 @@
                     android:textColor="#9E9E9E"
                     android:textStyle="italic" />
             </RelativeLayout>
+
         </RelativeLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginTop="15dp"
-            android:orientation="vertical">
-
-            <com.romainpiel.shimmer.ShimmerTextView
-                android:id="@+id/tvTap"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="cursive"
-                android:gravity="center_horizontal"
-                android:text="Tap to identify music"
-                android:textColor="#444"
-                android:textSize="30sp" />
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/tvTapCancel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="350dp"
-            android:fontFamily="cursive"
-            android:gravity="center"
-            android:textColor="#fff"
-            android:textSize="25sp" />
-
-        <com.skyfishjy.library.RippleBackground xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/content"
-            android:layout_width="match_parent"
-            android:layout_height="420dp"
-            app:rb_color="#FF5252"
-            app:rb_duration="3000"
-            app:rb_radius="36dp"
-            app:rb_rippleAmount="4"
-            app:rb_scale="6"
-            app:rb_strokeWidth="10dp"
-            app:rb_type="fillRipple">
-
-            <Button
-                android:id="@+id/btnRecord"
-                android:layout_width="128dp"
-                android:layout_height="128dp"
-                android:layout_centerInParent="true"
-                android:background="@drawable/ic_magnet" />
-
-        </com.skyfishjy.library.RippleBackground>
-
-    </FrameLayout>
+    </LinearLayout>
 
 </LinearLayout>

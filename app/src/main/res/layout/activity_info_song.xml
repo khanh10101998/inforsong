@@ -1,67 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@android:color/holo_orange_dark"
-    tools:context="nhan1303.watsong.activity.InfoSongActivity">
+    android:background="@drawable/bg_kk"
+    android:fitsSystemWindows="false">
 
-    <ImageView
-        android:id="@+id/imgBack"
-        android:layout_marginTop="40dp"
-        android:layout_marginLeft="16dp"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@drawable/ic_backward1_32dp"
-        />
-
-    <ImageView
-        android:layout_marginTop="10dp"
-        android:id="@+id/imgCoverArt"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center_horizontal"
-        android:src="@color/colorAccent" />
-
-    <TextView
-        android:layout_marginTop="10dp"
-        android:id="@+id/tvTitle"
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:fontFamily="cursive"
-        android:gravity="center"
-        android:textColor="#fff"
-        android:textStyle="bold"
-        android:textSize="22sp" />
+        android:layout_height="@dimen/height_appbar_information_song"
+        android:background="@android:color/transparent"
+        android:fitsSystemWindows="false">
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                layout="@layout/info_singer" />
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@android:color/transparent"
+                app:layout_collapseMode="pin"
+                >
 
-    <TextView
-        android:id="@+id/tvArtist"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp">
+                    <ImageView
+                        android:id="@+id/iv_back"
+                        android:layout_gravity="center_vertical"
+                        android:padding="8dp"
+                        android:layout_width="@dimen/size_imageView_information_song"
+                        android:layout_height="@dimen/size_imageView_information_song"
+                        android:src="@drawable/ic_back" />
+                    <LinearLayout
+                        android:id="@+id/line_toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_title_song"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="start"
+                            android:textColor="#fff"
+                            android:textSize="@dimen/textSize_tv_song_info_singer"
+                            />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </android.support.v7.widget.Toolbar>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_gravity="center_horizontal"
-        android:fontFamily="cursive"
-        android:gravity="center"
-        android:textColor="#fff"
-        android:textSize="18sp" />
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <TextView
-        android:id="@+id/tvTime"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="5dp"
-        android:fontFamily="cursive"
-        android:gravity="center"
-        android:textColor="#fff"
-        android:textSize="16sp" />
+        <include layout="@layout/content_info_song" />
+    </android.support.v4.widget.NestedScrollView>
 
-    <TextView
-        android:id="@+id/tvIdYouTube"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

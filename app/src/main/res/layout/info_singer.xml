@@ -2,6 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="105dp"
+    android:id="@+id/info_singer_layout"
+    android:background="@android:color/transparent"
     android:layout_gravity="center">
 
     <ImageView
@@ -11,7 +13,7 @@
         android:layout_centerHorizontal="true"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
-        android:src="@drawable/trieuledinh" />
+        android:src="@drawable/ic_place_holder"/>
 
     <TextView
         android:id="@+id/tvSong"
@@ -33,6 +35,7 @@
         android:layout_centerHorizontal="true"
         android:text="singer"
         android:textColor="#d6d6d6"
+        android:layout_marginTop="2dp"
         android:textSize="@dimen/textSize_tv_singer_info_singer" />
 
 </RelativeLayout>

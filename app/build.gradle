@@ -1,10 +1,11 @@
 apply plugin: 'com.android.application'
 
+
 android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "nhan1303.watsong"
-        minSdkVersion 22
+        minSdkVersion 21
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -22,27 +23,16 @@ android {
             path 'src/main/jniLibs/Android.mk'
         }
     }
-    packagingOptions {
-        exclude 'META-INF/DEPENDENCIES'
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/LICENSE.txt'
-        exclude 'META-INF/license.txt'
-        exclude 'META-INF/NOTICE'
-        exclude 'META-INF/NOTICE.txt'
-        exclude 'META-INF/notice.txt'
-        exclude 'META-INF/ASL2.0'
-    }
     compileOptions {
         targetCompatibility 1.8
         sourceCompatibility 1.8
     }
-
-
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.google.firebase:firebase-database:11.6.2'
     compile 'com.skyfishjy.ripplebackground:library:1.0.1'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
@@ -53,11 +43,22 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.9.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.romainpiel.shimmer:library:1.4.0@aar'
-    compile 'org.apache.httpcomponents:httpcore:4.4.1'
-    compile 'org.apache.httpcomponents:httpclient:4.5'
+    compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.4'
+    compile 'uk.co.chrisjenx:calligraphy:2.3.0'
+
+
     compile 'com.android.support:design:26.+'
     compile 'com.facebook.android:facebook-android-sdk:4.5.0'
-    compile 'com.google.android.gms:play-services-auth:9.0.0'
+    compile 'com.google.android.gms:play-services-auth:11.6.2'
+    compile 'com.google.android.gms:play-services-plus:11.6.2'
     implementation files('libs/YouTubeAndroidPlayerApi.jar')
+    compile 'com.android.support:palette-v7:26.1.0'
+
+    compile 'com.google.firebase:firebase-core:11.6.2'
+    compile 'com.google.firebase:firebase-auth:11.6.2'
+
+
+
+
 }
 apply plugin: 'com.google.gms.google-services'

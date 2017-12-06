@@ -1,7 +1,5 @@
 package nhan1303.watsong.interfaceWatSong;
 
-import java.util.ArrayList;
-
 import nhan1303.watsong.model.InfoSong;
 
 /**
@@ -10,4 +8,6 @@ import nhan1303.watsong.model.InfoSong;
 
 public interface CommunicationInterface {
     void onClickFragmentMain(InfoSong infoSong);
+    void updateListSongAfterRemove(InfoSong infoSong);
+    void idUser(String id);
 }

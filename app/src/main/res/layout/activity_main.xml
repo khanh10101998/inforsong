@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:background="@drawable/bgGradient"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@drawable/bg_gradient"
+    android:layout_height="match_parent"
+    tools:ignore="MissingPrefix">
     <RelativeLayout
         android:layout_marginTop="25dp"
         android:layout_width="match_parent"
@@ -15,7 +18,6 @@
             android:layout_height="80dp"
             android:orientation="vertical"
             android:layout_marginLeft="16dp"
-
             android:gravity="center">
             <ImageView
                 android:layout_width="25dp"
@@ -24,10 +26,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="My WatSong"
+                android:text="My Watsong"
+                fontPath="fonts/TenorSans-Regular.ttf"
                 android:textSize="10sp"
                 android:textColor="#fff"
                 />
+
         </LinearLayout>
 
         <LinearLayout
@@ -36,20 +40,27 @@
             android:layout_centerHorizontal="true"
             android:gravity="center">
 
-            <Button
-                android:id="@+id/btn_fragment_history"
+            <ImageView
+                android:id="@+id/iv_fragment_history"
                 android:layout_width="@dimen/size_button_circle"
                 android:layout_height="@dimen/size_button_circle"
-                android:background="@drawable/circle_default" />
+                android:padding="9dp"
+                android:layout_marginRight="-4dp"
+                android:src="@drawable/circle_default"
+                android:background="@android:color/transparent"/>
 
-            <Button
-                android:id="@+id/btn_fragment_main"
+            <ImageView
+                android:id="@+id/iv_fragment_main"
                 android:layout_width="@dimen/size_button_circle"
                 android:layout_height="@dimen/size_button_circle"
+                android:padding="9dp"
+                android:layout_marginStart="-4dp"
                 android:layout_marginLeft="@dimen/margin_left_button_circle"
-                android:background="@drawable/circle_default" />
+                android:src="@drawable/circle_default"
+                android:background="@android:color/transparent"/>
 
         </LinearLayout>
+
 
     </RelativeLayout>
 

@@ -1,6 +1,8 @@
 package nhan1303.watsong.adapter;
 
 import android.content.Context;
+import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -22,9 +24,12 @@ import nhan1303.watsong.model.InfoSong;
  */
 
 public class AdapterHistory extends ArrayAdapter {
+    AssetManager assetManager = getContext().getAssets();
     Context context;
     int resource;
     List<InfoSong> objects;
+    Typeface font;
+
     public AdapterHistory(@NonNull Context context, int resource, @NonNull List objects) {
         super(context, resource, objects);
         this.context = context;
@@ -38,19 +43,26 @@ public class AdapterHistory extends ArrayAdapter {
         if(convertView == null){
             convertView = LayoutInflater.from(context).inflate(R.layout.item_history_list_view, null);
             viewHolder = new ViewHolder();
+            font = Typeface.createFromAsset(assetManager, "fonts/TenorSans-Regular.ttf");
+
             viewHolder.img_item_history = convertView.findViewById(R.id.img_item_history);
             viewHolder.tv_title_item_history = convertView.findViewById(R.id.tv_title_item_history);
             viewHolder.tv_artist_item_history = convertView.findViewById(R.id.tv_artist_item_history);
             viewHolder.tv_date_time_item_history = convertView.findViewById(R.id.tv_date_time_item_history);
             viewHolder.tv_divider = convertView.findViewById(R.id.tv_divider);
+
+            viewHolder.tv_title_item_history.setTypeface(font);
+            viewHolder.tv_date_time_item_history.setTypeface(font);
+            viewHolder.tv_divider.setTypeface(font);
+
             convertView.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
         InfoSong info = objects.get(position);
-        viewHolder.tv_title_item_history.setText(info.getTitle_track());
-        viewHolder.tv_artist_item_history.setText(info.getArtist_name());
+        viewHolder.tv_title_item_history.setText(info.getTitleTrack());
+        viewHolder.tv_artist_item_history.setText(info.getArtistName());
         viewHolder.tv_date_time_item_history.setText(info.getCurrentTime());
         if(info.getUrlImage().equals("")){
             Picasso.with(context).load(R.drawable.ic_place_holder).into(viewHolder.img_item_history);
@@ -68,4 +80,7 @@ public class AdapterHistory extends ArrayAdapter {
         TextView tv_date_time_item_history;
         TextView tv_divider;
     }
+
+
+
 }

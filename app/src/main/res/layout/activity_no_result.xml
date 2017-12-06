@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="#FFB300"
     android:orientation="vertical"
-    tools:context="nhan1303.watsong.activity.NoResultActivity">
+    tools:context="nhan1303.watsong.activity.NoResultActivity"
+    tools:ignore="MissingPrefix">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -36,6 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            fontPath="fonts/TenorSans-Regular.ttf"
             android:text="No Result."
             android:textStyle="bold"
             android:textColor="#fff"
@@ -44,6 +46,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            fontPath="fonts/TenorSans-Regular.ttf"
             android:text="We didn't quite catch that"
             android:textColor="#fff"
             android:textSize="16sp" />
@@ -55,6 +58,7 @@
             android:layout_marginTop="32dp"
             android:layout_marginLeft="32dp"
             android:layout_marginRight="32dp"
+            fontPath="fonts/TenorSans-Regular.ttf"
             android:text="Try Again"
             android:textStyle="bold"
             android:textSize="14sp"

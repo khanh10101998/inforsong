@@ -7,8 +7,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -20,37 +22,29 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.acrcloud.rec.sdk.ACRCloudClient;
 import com.acrcloud.rec.sdk.ACRCloudConfig;
 import com.acrcloud.rec.sdk.IACRCloudListener;
 import com.romainpiel.shimmer.Shimmer;
 import com.romainpiel.shimmer.ShimmerTextView;
 import com.skyfishjy.library.RippleBackground;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
-import java.util.concurrent.ExecutionException;
-
-import nhan1303.watsong.R;
-import nhan1303.watsong.ReadJson;
 import nhan1303.watsong.activity.InfoSongActivity;
 import nhan1303.watsong.activity.NoResultActivity;
 import nhan1303.watsong.animation.MyBounceInterpolator;
+import nhan1303.watsong.R;
 import nhan1303.watsong.interfaceWatSong.CommunicationInterface;
 import nhan1303.watsong.model.InfoSong;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-
 
 /**
  * Created by NHAN on 13/11/2017.
@@ -58,35 +52,27 @@ import okhttp3.Response;
 
 @SuppressLint("ValidFragment")
 public class FragmentMain extends Fragment implements IACRCloudListener {
+    private final static int REQUEST_CODE_WIRELESS_SETTINGS = 111;
     private Context context;
     private Button btnRecord;
-    private RippleBackground rippleBackground;
-    private ACRCloudClient mClient;
-    private ACRCloudConfig mConfig;
     private ShimmerTextView tvTap;
     private TextView tvTapCancel;
     private Shimmer shimmer;
-
+    private RippleBackground rippleBackground;
+    private MyBounceInterpolator interpolator;
+    private Animation myAnim;
+    private ACRCloudClient mClient;
+    private ACRCloudConfig mConfig;
     private boolean mProcessing = false;
     private boolean initState = false;
-
-    private String path = "";
     private String title_track = "";
     private String artist_name = "";
-    private String idTrack = "";
-    private String linkCoverArt = "";
-    private String vid = null;
+    private String vid = "";
+    String linkCoverArt = "";
     private boolean hasCoverArt = false;
     private boolean isTapped = false;
-    InfoSong infoSong;
-    SimpleDateFormat format = new SimpleDateFormat("HH:mm, dd-MM-yyyy", Locale.getDefault());
-    String currentTime = "";
-    ArrayList<InfoSong> tempArrayList = null;
-    CommunicationInterface listener;
-    MyBounceInterpolator interpolator;
-    ReadJson readJson;
-    Animation myAnim;
-
+    private SimpleDateFormat format = new SimpleDateFormat("HH:mm, dd-MM-yyyy", Locale.getDefault());
+    private CommunicationInterface listener;
 
     @SuppressLint("ValidFragment")
     public FragmentMain(Context context) {
@@ -99,9 +85,6 @@ public class FragmentMain extends Fragment implements IACRCloudListener {
         initData();
         initDisplay();
         initEvent();
-
-
-
     }
 
     public FragmentMain() {
@@ -109,12 +92,8 @@ public class FragmentMain extends Fragment implements IACRCloudListener {
 
     private void initData() {
         initARCSound();
-        tempArrayList = new ArrayList<>();
         initRippleAnimationButton();
         initBounceAnimmation();
-
-
-
     }
 
     private void initControl(View view) {
@@ -124,21 +103,9 @@ public class FragmentMain extends Fragment implements IACRCloudListener {
     }
 
     private void initDisplay() {
-        tvTap.setVisibility(View.VISIBLE);
         shimmerForTextView(tvTap);
         btnRecord.startAnimation(myAnim);
     }
-
-    private void updateDisplay() {
-        if (NoResultActivity.tryAgain) {
-            btnRecord.callOnClick();
-            NoResultActivity.tryAgain = false;
-        } else {
-            tvTap.setText("Tap to identify music");
-            NoResultActivity.cancel = false;
-        }
-    }
-
 
     private void initEvent() {
         btnRecord.setOnClickListener(new View.OnClickListener() {
@@ -146,20 +113,11 @@ public class FragmentMain extends Fragment implements IACRCloudListener {
             public void onClick(View view) {
                 if (isNetworkAvailable()) {
                     if (isTapped == false) {
-                        isTapped = true;
-                        rippleBackground.startRippleAnimation();
-                        tvTapCancel.setText("Tap to cancel.");
-                        tvTap.setText("Listening...");
+                        updateUIActive();
                         start();
-
                     } else {
                         cancel();
-                        rippleBackground.stopRippleAnimation();
-                        tvTapCancel.setText("");
-                        tvTap.setText("Tap to identify music");
-                        isTapped = false;
-
-
+                        updateUINormal();
                     }
                 } else {
                     showDialogInternet();
@@ -167,6 +125,20 @@ public class FragmentMain extends Fragment implements IACRCloudListener {
             }
         });
 
+    }
+
+    private void updateUIActive() {
+        isTapped = true;
+        rippleBackground.startRippleAnimation();
+        tvTapCancel.setText("Tap to cancel.");
+        tvTap.setText("Listening...");
+    }
+
+    private void updateUINormal() {
+        rippleBackground.stopRippleAnimation();
+        tvTapCancel.setText("");
+        tvTap.setText("Tap to identify music");
+        isTapped = false;
     }
 
     private void showDialogInternet() {
@@ -181,7 +153,7 @@ public class FragmentMain extends Fragment implements IACRCloudListener {
         });
         adb.setNegativeButton("Setting", new AlertDialog.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
+                startActivityForResult(new Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS), REQUEST_CODE_WIRELESS_SETTINGS);
                 dialog.dismiss();
             }
         });
@@ -189,7 +161,7 @@ public class FragmentMain extends Fragment implements IACRCloudListener {
     }
 
     private void initARCSound() {
-        path = Environment.getExternalStorageDirectory().toString()
+        String path = Environment.getExternalStorageDirectory().toString()
                 + "/acrcloud/model";
 
         File file = new File(path);
@@ -251,51 +223,24 @@ public class FragmentMain extends Fragment implements IACRCloudListener {
         return connected;
     }
 
-    private void getCoverArt(final String idTrack) {
-        String url = "https://open.spotify.com/oembed?url=spotify:track:" + idTrack;
-        try {
-            OkHttpClient client = new OkHttpClient();
-            Request request = new Request.Builder()
-                    .url(url)
-                    .build();
-            Response responses = null;
-
-            try {
-                responses = client.newCall(request).execute();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            String jsonData = responses.body().string();
-            JSONObject Jobject = new JSONObject(jsonData);
-            linkCoverArt = Jobject.getString("thumbnail_url");
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    hasCoverArt = true;
-                    saveSong();
-                }
-            });
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Log.d("RESULT", "LINK_COVER_ART: " + linkCoverArt);
-    }
-
-    private void saveSong() {
-        currentTime = format.format(new Date());
+    private void createSong() {
+        InfoSong infoSong;
+        String currentTime = format.format(new Date());
         if (hasCoverArt) {
             infoSong = new InfoSong(title_track, artist_name, linkCoverArt, currentTime, vid);
             hasCoverArt = false;
+            vid = "";
+            linkCoverArt = "";
+            Log.d("RESULT", "Create Song Object: " + infoSong.toString());
         } else {
             infoSong = new InfoSong(title_track, artist_name, R.drawable.ic_place_holder, currentTime, vid);
+            vid = "";
         }
 
         listener.onClickFragmentMain(infoSong);
 
         Intent intent = new Intent(context, InfoSongActivity.class);
-        intent.putExtra("SONG", infoSong);
+        intent.putExtra("NEW_SONG", infoSong);
         startActivity(intent);
     }
 
@@ -336,17 +281,6 @@ public class FragmentMain extends Fragment implements IACRCloudListener {
             if (j2 == 0) {
                 JSONObject metadata = j.getJSONObject("metadata");
 
-
-                if (metadata.has("streams")) {
-                    JSONArray musics = metadata.getJSONArray("streams");
-                    for (int i = 0; i < musics.length(); i++) {
-                        JSONObject tt = (JSONObject) musics.get(i);
-                        String title = tt.getString("title");
-                        String channelId = tt.getString("channel_id");
-                        tres = tres + (i + 1) + ".  Title: " + title + "    Channel Id: " + channelId + "\n";
-                    }
-                }
-
                 if (metadata.has("music")) {
                     JSONArray musics = metadata.getJSONArray("music");
                     for (int i = 0; i < musics.length(); i++) {
@@ -356,46 +290,27 @@ public class FragmentMain extends Fragment implements IACRCloudListener {
                         JSONObject art = (JSONObject) artistt.get(0);
                         artist_name = art.getString("name");
                         tres = tres + (i + 1) + ".  Title: " + title_track + "    Artist: " + artist_name + "\n";
+
                         JSONObject external_metadata = tt.getJSONObject("external_metadata");
 
                         if (external_metadata.has("youtube")) {
-                            JSONObject spotify = external_metadata.getJSONObject("youtube");
-                            vid = spotify.getString("vid");
-                        }else {
-                            getActivity().runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    readJson =new ReadJson(title_track,artist_name);
-                                    try {
-                                        readJson.execute().get();
-                                    } catch (InterruptedException e) {
-                                        e.printStackTrace();
-                                    } catch (ExecutionException e) {
-                                        e.printStackTrace();
-                                    }
-
-                                }
-                            });
-                            vid = readJson.getVideoId();
+                            JSONObject youtube = external_metadata.getJSONObject("youtube");
+                            vid = youtube.getString("vid");
+                        } else {
+                            new GetIDYoutubeAsyncTask().execute();
                         }
-
 
                         if (external_metadata.has("spotify")) {
                             JSONObject spotify = external_metadata.getJSONObject("spotify");
                             JSONObject track = spotify.getJSONObject("track");
-                            idTrack = track.getString("id");
-
-                            Thread thread = new Thread() {
-                                @Override
-                                public void run() {
-                                    getCoverArt(idTrack);
-                                }
-                            };
-                            thread.start();
-                        } else {
-                            saveSong();
+                            String idTrack = track.getString("id");
+                            hasCoverArt = true;
+                            new GetCoverArtAsyncTask().execute(idTrack);
+                            break;
                         }
+
                     }
+
                 }
 
                 tres = tres + "\n\n" + result;
@@ -408,15 +323,10 @@ public class FragmentMain extends Fragment implements IACRCloudListener {
             tres = result;
             e.printStackTrace();
         }
+
         Log.d("RESULT", "JSON: " + tres);
-        Log.d("RESULT", "IDTRACK: " + idTrack);
-        rippleBackground.stopRippleAnimation();
-        tvTap.setVisibility(View.GONE);
-        isTapped = false;
-        tvTapCancel.setText("");
+        updateUINormal();
     }
-
-
 
     @Override
     public void onVolumeChanged(double v) {
@@ -444,7 +354,115 @@ public class FragmentMain extends Fragment implements IACRCloudListener {
     @Override
     public void onResume() {
         super.onResume();
-        initDisplay();
-        updateDisplay();
+
+        btnRecord.startAnimation(myAnim);
+        if (NoResultActivity.tryAgain) {
+            btnRecord.callOnClick();
+            NoResultActivity.tryAgain = false;
+        }
+    }
+
+    class GetCoverArtAsyncTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            String url = "https://open.spotify.com/oembed?url=spotify:track:" + params[0];
+            try {
+                OkHttpClient client = new OkHttpClient();
+                Request request = new Request.Builder()
+                        .url(url)
+                        .build();
+                Response responses = null;
+
+                try {
+                    responses = client.newCall(request).execute();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                String jsonData = responses.body().string();
+                JSONObject Jobject = new JSONObject(jsonData);
+                linkCoverArt = Jobject.getString("thumbnail_url");
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Log.d("RESULT", "LINK_COVER_ART: " + linkCoverArt);
+
+            return linkCoverArt;
+        }
+
+        @Override
+        protected void onPostExecute(String linkCoverArt) {
+            super.onPostExecute(linkCoverArt);
+            createSong();
+        }
+    }
+
+    class GetIDYoutubeAsyncTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... voids) {
+            String url = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=" + title_track + "-" + artist_name + "&key=AIzaSyDHd4sAjoUsi7Gme2g6dHHClZpTQsLyT4E";
+
+            try {
+                OkHttpClient client = new OkHttpClient();
+                Request request = new Request.Builder()
+                        .url(url)
+                        .build();
+                Response responses = null;
+
+                try {
+                    responses = client.newCall(request).execute();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                String jsonData = responses.body().string();
+                JSONObject Jobject = new JSONObject(jsonData);
+                JSONArray items = Jobject.getJSONArray("items");
+                JSONObject item = (JSONObject) items.get(0);
+                JSONObject idObject = (JSONObject) item.get("id");
+                vid = idObject.getString("videoId");
+                Log.d("RESULT", "VID: " + vid);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            if(!hasCoverArt){
+                createSong();
+            }
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQUEST_CODE_WIRELESS_SETTINGS) {
+
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if(isNetworkAvailable()) {
+                        Toast.makeText(context, "Connected", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(context, "No Internet Access", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }, 5000);
+        }
     }
 }
